@@ -3,6 +3,7 @@
 <%@ include file="./sessionCheck.jsp"%>
 
 <%@ include file="./header.jsp" %>
+<script src="./common.js"></script>
 <h1>회원가입</h1>
 <form action="joinPro.jsp" method="post">
 	<table border="1">

@@ -15,6 +15,7 @@ public class MemberDAO {
 		mList.add(new Member("abcd", "2222", "박영희", "여성"));
 		mList.add(new Member("hello", "3333", "이수민", "여성"));
 		log = -1;
+		title="로그아웃 상태";
 	}
 
 	public ArrayList<Member> getmList() {
@@ -70,5 +71,10 @@ public class MemberDAO {
 	// 회원 삭제
 	public void DeleteMember(int idx) {
 		mList.remove(idx);
+	}
+	
+	// 이름 보내기
+	public String nameValue(int idx) {
+		return mList.get(idx).getName();
 	}
 }

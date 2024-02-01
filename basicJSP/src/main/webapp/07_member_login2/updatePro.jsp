@@ -5,6 +5,13 @@
 <script src="./common.js"></script>
 <%
 MemberDAO dao = (MemberDAO) session.getAttribute("dao");
+if (dao.getLog() == -1) {
+%>
+<script>
+	msgError();
+</script>
+<%
+} else {
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
 String name = request.getParameter("name");
@@ -13,6 +20,7 @@ String gender = request.getParameter("gender");
 int idx = dao.loginCheck(id, pw);
 
 if (idx != -1) {
+	dao.setTitle(name + " 로그인중");
 	dao.getmList().get(idx).setName(name);
 	dao.getmList().get(idx).setGender(gender);
 %>
@@ -26,5 +34,6 @@ if (idx != -1) {
 	msgUrl("비밀번호 틀림", "updateForm.jsp");
 </script>
 <%
+}
 }
 %>

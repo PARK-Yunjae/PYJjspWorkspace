@@ -53,5 +53,3 @@ String memo =  request.getParameter("memo");
 
 </body>
 </html>
-</body>
-</html>

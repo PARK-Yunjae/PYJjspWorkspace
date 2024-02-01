@@ -11,7 +11,7 @@ function printMsg( url ,msg) {
   <%
   String inputId = request.getParameter("inputId");
   String inputPw = request.getParameter("inputPw");
-  ArrayList<String> list = (ArrayList)session.getAttribute("user");
+  ArrayList<String> list = (ArrayList<String>)session.getAttribute("user");
   boolean pass = false;
   String dbId = list.get(0);
   String dbPw = list.get(1);

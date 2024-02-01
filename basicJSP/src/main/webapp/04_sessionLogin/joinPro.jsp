@@ -8,7 +8,7 @@
  String pw = request.getParameter("pw");
  
  session.setAttribute("name", name);
- ArrayList<String> list = new ArrayList();
+ ArrayList<String> list = new ArrayList<String>();
  list.add(id);
  list.add(pw);
  session.setAttribute("user", list);

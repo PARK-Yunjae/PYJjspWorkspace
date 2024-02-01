@@ -7,6 +7,14 @@
 <script src="./common.js"></script>
 <%
 MemberDAO dao = (MemberDAO) session.getAttribute("dao");
+if (dao.getLog() == -1) {
+%>
+<script>
+	msgError();
+</script>
+<%
+} else {
+
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
 String name = request.getParameter("name");
@@ -26,5 +34,7 @@ if (pass) {
 	msgUrl("중복 ID 존재", "main.jsp");
 </script>
 <%
+}
+
 }
 %>

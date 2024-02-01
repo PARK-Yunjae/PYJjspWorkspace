@@ -3,6 +3,7 @@
 <%@ include file="./sessionCheck.jsp"%>
     
 <%@ include file="./header.jsp" %>
+<script src="./common.js"></script>
 	<h1>로그인</h1>
 	<form action="loginPro.jsp" method="post">
 		<table border="1">

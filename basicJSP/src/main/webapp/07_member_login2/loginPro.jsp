@@ -11,6 +11,11 @@ int idx = dao.loginCheck(id, pw);
 
 dao.setLog(idx);
 if (idx != -1) {
+	String name = dao.nameValue(idx); 
+	if(idx == 0)
+		dao.setTitle("관리자 로그인중");
+	if(idx > 0)
+		dao.setTitle(name + " 로그인중");
 %>
 <script>
 	msgUrl("로그인 성공", "main.jsp");
