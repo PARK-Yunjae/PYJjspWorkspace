@@ -1,43 +1,48 @@
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ page import="board.BoardDAO"%>
-<%@ include file="./sessionCheck.jsp"%>
-<%
-BoardDAO dao = (BoardDAO) session.getAttribute("dao");
-%>
+    pageEncoding="UTF-8"%>
+    
+ 	<%
+    if(session.getAttribute("dao") == null){
+      	 response.sendRedirect("index.jsp");
+      	 return;
+      }
+    BoardDAO dao = (BoardDAO)session.getAttribute("dao");
+	%>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./style.css">
 </head>
 <body>
 	<h1>게시글 추가하기</h1>
-	<form action="_04_addBoardPro.jsp" method="post">
-		<table border="1">			
+	<form method="post" action="_04_addBoardPro.jsp">
+		<table border="1">
 			<tr>
-				<td>번호</td>
-				<td colspan="3"><%=dao.getCnt() %></td>
+				<th>번호</th>
+				<td><%= dao.getTotalData() + 1 %></td>
 			</tr>
 			<tr>
-				<td>작성자</td>
-				<td colspan="3"><input type="text" name="write"/></td>
+				<th>작성자</th>
+				<td><input type="text" name="writer" required></td>
 			</tr>
 			<tr>
-				<td>제목</td>
-				<td colspan="3"><input type="text" name="subject"/></td>
+				<th>제목</th>
+				<td><input type="text" name="subject" required></td>
 			</tr>
 			<tr>
-				<td>내용</td>
-				<td colspan="3"><textarea cols="30" rows="10" name="contents"></textarea></td>
+				<th>내용</th>
+				<td>
+					<textarea rows="10" cols="20" name="contents" required></textarea>
+				</td>
 			</tr>
 			<tr>
-				<td colspan="4"><input type="submit" value="작성완료" /></td>
+				<td colspan="2">
+					<input type="submit" value="작성완료">
+				</td>
 			</tr>
 		</table>
-		<input type="hidden" name="cnt" value="<%=dao.getCnt()%>"/>
 	</form>
-	<a href="_00_main.jsp">메인으로</a>
 </body>
 </html>

@@ -26,7 +26,7 @@
 */
 
 %>
-<form action="ex06_form05.jsp" method="post">
+<form action="ex06_form05.jsp" method="get">
 	<table border="1">
 	<tr>
 		<td>첫번째 수 : </td>

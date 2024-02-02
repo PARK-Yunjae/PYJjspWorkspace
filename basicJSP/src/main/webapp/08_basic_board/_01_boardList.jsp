@@ -1,8 +1,13 @@
+<%@page import="board.Board"%>
+<%@page import="board.BoardDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="board.BoardDAO"%>
-<%@ include file="./sessionCheck.jsp"%>
 <%
+if(session.getAttribute("dao") == null){
+	response.sendRedirect("index.jsp");
+	return;
+}
+
 BoardDAO dao = (BoardDAO)session.getAttribute("dao");
 %>
 <!DOCTYPE html>
@@ -10,9 +15,10 @@ BoardDAO dao = (BoardDAO)session.getAttribute("dao");
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="./style.css">
 </head>
 <body>
+<p> 전체 게시글 수 <%=dao.getTotalData() %></p>
+	
 	<table border="1">
 		<tr>
 			<th>번호</th>
@@ -22,18 +28,21 @@ BoardDAO dao = (BoardDAO)session.getAttribute("dao");
 			<th>내용</th>
 			<th>삭제</th>
 		</tr>
-		<%for(int i=0 ; i<dao.getbList().size() ; i++){ %>
-		<tr>
-			<th><%=dao.getbList().get(i).getNo()%></th>
-			<th><%=dao.getbList().get(i).getWrite()%></th>
-			<th><%=dao.getbList().get(i).getRegDate()%></th>
-			<th><a href="_05_updateBoard.jsp?idx=<%=i%>"><%=dao.getbList().get(i).getSubject()%></a></th>
-			<th><%=dao.getbList().get(i).getContents()%></th>
-			<th><button
-				onclick="location.href='_06_deleteBoardPro.jsp?idx=<%=i%>'">삭제하기</button></th>
-		</tr>
+		<% for(int i =0; i < dao.getTotalData(); i+=1){ 
+			Board b = dao.getOneBoard(i);
+			%>
+			<tr>
+			  <td> <%=b.getNo() %></td>
+			  <td> <%=b.getWriter() %></td>
+			  <td> <%=b.getRegDate() %></td>
+			  <td> <a href="_05_updateBoard.jsp?idx=<%= i %>" > <%=b.getSubject() %> </a> </td>
+			  <td> <%=b.getContents() %></td>
+			  <td> <button onclick="location.href='_06_deleteBoardPro.jsp?idx=<%= i %>'"> 삭제 </button></td>
+			</tr>
+		
 		<%} %>
 	</table>
-	<a href="_00_main.jsp">메인으로</a>
+	<br><br>
+	<button onclick="location.href='_00_main.jsp'"> 메인으로 </button>
 </body>
 </html>

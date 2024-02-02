@@ -11,7 +11,9 @@ function printMsg( url ,msg) {
 String id = request.getParameter("id");
 String pw = request.getParameter("pw");
 
+@SuppressWarnings("unchecked")
 ArrayList<String> idList = (ArrayList<String>)session.getAttribute("idList");
+@SuppressWarnings("unchecked")
 ArrayList<String> pwList = (ArrayList<String>)session.getAttribute("pwList");
 
 int log = 0;

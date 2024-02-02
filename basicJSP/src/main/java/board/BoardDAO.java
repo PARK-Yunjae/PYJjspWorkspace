@@ -1,95 +1,135 @@
 package board;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class BoardDAO {
-	private ArrayList<BoardVO> bList;
-	private int cnt = 0;
-	private int count; // 전체 게시글 수
-	private int pageSize = 5; // 한 페이지에 보여줄 게시글 수
-	private int curPageNum = 1; // 현재 페이지 번호
-	private int pageCount = 0; // 전체 페이지 개수
-	private int startRow = 0; // 현재 페이지의 게시글 시작 번호
-	private int endRow = 0; // 현재 페이지의 게시글 마지막 번호
-
-	public void setCurPageNum(int curPageNum) {
-		this.curPageNum = curPageNum;
-	}
-
-	public int getCount() {
-		return count;
+	
+	private ArrayList<Board> list;
+	private int cnt;
+	public BoardDAO(){
+		list = new ArrayList<Board>();
+		cnt = 1;
+		init();
+		
+		System.out.println("[정보 로드 완료]");
 	}
 	
-	public int getPageSize() {
-		return pageSize;
+	private void init() {
+		Board b1 = new Board(cnt++,"작성자1","2024-02-01","제목1","내용1");
+		Board b2 = new Board(cnt++,"작성자2","2024-02-01","제목2","내용2");
+		Board b3 = new Board(cnt++,"작성자3","2024-02-01","제목3","내용3");
+		
+		list.add(b1);
+		list.add(b2);
+		list.add(b3);
+		
 	}
-
-	public int getCurPageNum() {
-		return curPageNum;
+	
+	public int getTotalData() {
+		return list.size();
 	}
-
-	public int getPageCount() {
-		return pageCount;
+	
+	public Board getOneBoard(int idx) {
+		return list.get(idx);
 	}
-
-	public int getStartRow() {
-		return startRow;
-	}
-
-	public int getEndRow() {
-		return endRow;
-	}
-
-	public BoardDAO() {
-		this.bList = new ArrayList<BoardVO>();
-	}
-
-	public ArrayList<BoardVO> getbList() {
-		return bList;
-	}
-
-	public int getCnt() {
-		return cnt;
-	}
-
-	// 더미글 10개 추가
-	public void AddDummy() {
-		for (int i = 0; i < 10; i++) {
-			Date date = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-			bList.add(new BoardVO(cnt++, "작성자", "제목", "내용", formatter.format(date)));
+	
+	public void createDummies(int size) {
+		
+		LocalDate date = LocalDate.now();
+		
+		for(int i =0; i < size;i++) {
+			
+			Board b = new Board(cnt,"작성자"+cnt,date.plusDays(i).toString(),"제목"+cnt,"내용"+cnt);
+			cnt+=1;
+			list.add(b);
 		}
+		System.out.println("[ 더미 추가 완료 ]");
+		
 	}
-
-	// 글 1개 삭제
-	public void deleteBoard(int idx) {
-		bList.remove(idx);
+	
+	public void deleteAllData() {
+		//list = new ArrayList<Board>();
+		list.clear();
+		cnt = 1; // 전체 삭제할때만 cnt 1로 초기화 했음 
+		System.out.println("[ 전체 데이터 삭제완료 ]");
 	}
-
-	// 글 전체 삭제
-	public void deleteAllBoard() {
-		bList = new ArrayList<BoardVO>();
+	
+	public void addOneBoard(String writer, String subject ,String contents) {
+		LocalDate date = LocalDate.now();
+		Board b = new Board(cnt++,writer,date.toString(),subject,contents);
+		list.add(b);
+		System.out.println(b);
+		System.out.println("[ 게시글 1개 추가 완료]");
+		
 	}
-
-	// 게시글 추가
-	public void addBoard(String write, String subject, String contents) {
-		Date date = new Date();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		bList.add(new BoardVO(cnt++, write, subject, contents, formatter.format(date)));
+	
+	public void updateOneBoard(String index, String subject, String contents) {
+		int idx = Integer.parseInt(index);
+		Board b = getOneBoard(idx);
+		
+		b.setSubject(subject);
+		b.setContents(contents);
+		System.out.println(b);
+		System.out.println("[ 게시글 1개 수정 완료]");
 	}
-
-	// 페이징 게시판
-	public void pagingBoard() {
-		count = bList.size();
-		pageCount = count / pageSize;
-		if (count % pageSize > 0)
-			pageCount += 1;
-		startRow = (curPageNum - 1) * pageSize;
-		endRow = startRow + pageSize;
-		if (endRow > count)
-			endRow = count;
+	
+	public boolean deleteOneBoard(String index) {
+		
+		int idx = -1;
+		
+		try {
+			idx = Integer.parseInt(index);
+			if(idx < 0 || idx>= list.size()) {
+				throw new Exception();
+			}
+		
+			list.remove(idx);
+			System.out.println("[ 게시글 1개 삭제 완료]");
+			return true;
+		}catch(Exception e) {
+			System.out.println("[ 게시글 1개 삭제 실패]");
+			return false;
+		}
+		
+		
 	}
-
+	
+	//----------
+	
+	public int boardCnt = 5; // 한페이지에보여줄게시글수
+	public int curPageNum = 1; // 현재페이지번호
+	
+	public void setCurPageNum(String start) {
+		curPageNum  = Integer.parseInt(start);
+	}
+	public int[] getRowData() {
+		// 0~4
+		
+	 int startNum = (curPageNum -1)*boardCnt; //현재페이지의게시글시작번호
+	 int endNum = startNum + boardCnt; // 현재페이지의게시글마지막번호
+	  endNum = endNum > list.size()? list.size():endNum;
+	  int[] arr = {startNum , endNum};
+	  return arr;
+	}
+	
+	//--------------
+	public int pageNumCnt = 3; //한페이지에보여줄페이지번호개수
+	public int startPageNum = 1; // 한페이지에보여줄페이지시작번호
+	
+	public void setStartPageNum(String end) {
+		startPageNum = Integer.parseInt(end);
+	}
+	
+	public int getEndPageNum() {
+		int endPageNum = startPageNum + pageNumCnt -1;
+		endPageNum = endPageNum > getTotalPageCnt()? getTotalPageCnt() : endPageNum;
+		return endPageNum; 
+		
+	}
+	// 전체 페이지 카운트 
+	public int getTotalPageCnt() {
+		return list.size() % boardCnt == 0? list.size() / boardCnt : list.size() / boardCnt + 1;
+	}
+	
 }

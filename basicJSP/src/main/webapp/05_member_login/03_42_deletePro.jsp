@@ -8,9 +8,13 @@ String name = request.getParameter("name");
 String gender = request.getParameter("gender");
 int log = (int)session.getAttribute("log");
 
+@SuppressWarnings("unchecked")
 ArrayList<String> idList = (ArrayList<String>)session.getAttribute("idList");
+@SuppressWarnings("unchecked")
 ArrayList<String> pwList = (ArrayList<String>)session.getAttribute("pwList");
+@SuppressWarnings("unchecked")
 ArrayList<String> namelist = (ArrayList<String>)session.getAttribute("namelist");
+@SuppressWarnings("unchecked")
 ArrayList<String> genderList = (ArrayList<String>)session.getAttribute("genderList");
 
 if(pwList.get(log).equals(pw)){

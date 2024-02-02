@@ -1,37 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-  <%
-  String com = request.getParameter("com");
-  String msg = "";
-  String text = "µÚ·Î°¡±â";
-  int rNum = Integer.parseInt(com);
-  int num = Integer.parseInt(request.getParameter("num"));
-
-  String link = "updownGameplay.jsp?com="+rNum;
-  
-  if(rNum > num) {
-	  msg = "UP";
-  }
-  if(rNum < num) {
-	  msg = "DOWM";
-  }
-  if(rNum == num) {
-	  msg = "Á¤´ä";
-	  text = "Ã³À½À¸·Î";
-	  link = "index.jsp";
-	  com = null;
-  }
-  
-  %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1><%= msg %></h1>
-	<a href="<%= link%>"><%= text%></a>
 
+<%
+   int com = Integer.parseInt(request.getParameter("com"));
+    int me = Integer.parseInt(request.getParameter("me"));
+    String msg ="";
+    if(me > com){
+    	msg="DOWN";
+    }else if(me < com){
+    	msg ="UP";
+    }else{
+    	msg="BINGO";
+    }
+
+%>
+
+<h1> <%= msg %></h1>
+
+<%
+if(me == com){
+%>
+	<a href="index.jsp"> ì²˜ìŒìœ¼ë¡œ </a>
+	
+<% }else{%>
+   <a href="updownGameplay.jsp?com=<%=com%>"> ë’¤ë¡œê°€ê¸° </a>
+   <button onclick="goUrl(<%=com%>)"> ë’¤ë¡œê°€ê¸° </button>
+<%} %>
 </body>
+<script type="text/javascript">
+	function goUrl(com) {
+		location.href="updownGameplay.jsp?com="+ com;
+	}
+</script>
 </html>

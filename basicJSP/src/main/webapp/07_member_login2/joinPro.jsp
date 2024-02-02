@@ -7,7 +7,7 @@
 <script src="./common.js"></script>
 <%
 MemberDAO dao = (MemberDAO) session.getAttribute("dao");
-if (dao.getLog() == -1) {
+if (dao.getLog() != -1) {
 %>
 <script>
 	msgError();

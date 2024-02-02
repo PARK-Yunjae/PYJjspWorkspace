@@ -15,13 +15,10 @@
 	  msg="로그인 실패";
   }
     %>
-  
+    
     
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
  <script>
 function printMsg(id, pw , name , url ,msg) {
 	alert(msg);
@@ -29,6 +26,9 @@ function printMsg(id, pw , name , url ,msg) {
 }
 
 </script>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 <h1> <%=name %></h1>

@@ -40,7 +40,7 @@
 
 <h1> <%= num %> </h1>
 <h1> <%= now %></h1>
-<a href="./ex01_basic.html"> ex01basic 이동 </a>
+<a href="./ex01basic.html"> ex01basic 이동 </a>
 
 <h2> 자바 코드 안에 h1 태그 생성하는 것 </h2>
 

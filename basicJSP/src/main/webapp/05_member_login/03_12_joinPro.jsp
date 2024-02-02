@@ -7,9 +7,13 @@ String pw = request.getParameter("pw");
 String name = request.getParameter("name");
 String gender = request.getParameter("gender");
 
+@SuppressWarnings("unchecked")
 ArrayList<String> idList = (ArrayList<String>)session.getAttribute("idList");
+@SuppressWarnings("unchecked")
 ArrayList<String> pwList = (ArrayList<String>)session.getAttribute("pwList");
+@SuppressWarnings("unchecked")
 ArrayList<String> namelist = (ArrayList<String>)session.getAttribute("namelist");
+@SuppressWarnings("unchecked")
 ArrayList<String> genderList = (ArrayList<String>)session.getAttribute("genderList");
 
 int idx = -1;

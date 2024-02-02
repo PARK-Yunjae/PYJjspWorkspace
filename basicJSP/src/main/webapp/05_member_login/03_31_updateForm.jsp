@@ -2,9 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+@SuppressWarnings("unchecked")
 ArrayList<String> idList = (ArrayList<String>)session.getAttribute("idList");
+@SuppressWarnings("unchecked")
 ArrayList<String> pwList = (ArrayList<String>)session.getAttribute("pwList");
+@SuppressWarnings("unchecked")
 ArrayList<String> namelist = (ArrayList<String>)session.getAttribute("namelist");
+@SuppressWarnings("unchecked")
 ArrayList<String> genderList = (ArrayList<String>)session.getAttribute("genderList");
 
 int log = (int)session.getAttribute("log");
