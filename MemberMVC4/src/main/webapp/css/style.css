@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+* {
+	box-sizing: border-box;
+	text-align: center;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+header {
+	background-color: skyblue;
+	opacity: 0.5;
+	font-size: 20px;
+	font-weight: 600;
+}
+
+header div :hover {
+	background: gray;
+	color: white;
+	cursor: pointer;
+}
+
+input {
+	text-align: left;
+}
+
+.left{
+	text-align: left;
+}
+
+tr{
+	border: 1px solid black;
+}
+
+tr :last-child {
+	text-align: left;
+}
+
+input[type=submit], input[type=reset] {
+	text-align: center;
+}
+
+#btns {
+	text-align: center;
+}
