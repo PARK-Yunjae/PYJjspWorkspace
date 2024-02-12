@@ -136,7 +136,7 @@
 
 
       
-      <Context docBase="MemberMVC4" path="/MemberMVC4" reloadable="true" source="org.eclipse.jst.jee.server:MemberMVC4"/><Context docBase="boardMVC3" path="/boardMVC3" reloadable="true" source="org.eclipse.jst.jee.server:boardMVC3"/></Host>
+      <Context docBase="boardMVC5" path="/boardMVC5" reloadable="true" source="org.eclipse.jst.jee.server:boardMVC5"/><Context docBase="MemberMVC5" path="/MemberMVC5" reloadable="true" source="org.eclipse.jst.jee.server:MemberMVC5"/></Host>
     </Engine>
   </Service>
 </Server>

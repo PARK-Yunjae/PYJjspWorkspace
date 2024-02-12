@@ -1,6 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="../../header.jsp"%>
+<style>
+tr :last-child {
+	text-align: left;
+}
+
+input[type=submit], input[type=reset] {
+	text-align: center;
+}
+
+#btns {
+	text-align: center;
+}
+</style>
 <c:if test="${vo==null}">
 	<h1 class="py-3">일치하는 회원이 없습니다</h1>
 </c:if>
